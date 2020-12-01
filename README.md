@@ -14,9 +14,10 @@ Based on and extended from the live coding video by [Thu Nghiem](https://www.you
     - Mapbox support
     - Worldbank API added using `getServerSideProps`. Click on the country flag in the country detailed view .
     - Added progress indicators
-    - react icons for all needs
-    - Image Optimization
+    - react-icons instead of material-ui icons
+    - Image Optimization - Image Component
     - SEO fixes
+    - Context API for maintaining filtered state
 
 
 ## Getting Started

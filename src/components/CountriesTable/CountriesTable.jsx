@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconContext } from "react-icons";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import CountryContext from "../CountryContext/CountryContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "./CountriesTable.module.css";
 
@@ -37,18 +38,27 @@ const SortArrow = ({ direction }) => {
   }
 };
 
-const CountriesTable = ({ countries }) => {
+const CountriesTable = () => {
   const PER_PAGE = 4;
-  const [direction, setDirection] = useState();
+  const {
+    filteredCountries,
+    value,
+    direction,
+    setDirection,
+    setValue,
+  } = useContext(CountryContext);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentList, setCurrentList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [value, setValue] = useState();
-  const orderedCountries = orderBy(countries, value, direction);
+  const [orderedCountries, setOrderedCountries] = useState([]);
 
   useEffect(() => {
-    fetchMoreData();
-  }, []);
+    const orderedList = orderBy(filteredCountries, value, direction);
+    setOrderedCountries(orderedList);
+    const currentPageData = orderedList.slice(0, PER_PAGE);
+    setCurrentList(currentPageData);
+    setCurrentPage(1);
+  }, [filteredCountries, value, direction]);
 
   const setValueAndDirection = (value) => {
     switchDirection();
