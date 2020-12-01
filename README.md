@@ -16,6 +16,7 @@ Based on and extended from the live coding video by [Thu Nghiem](https://www.you
     - Added progress indicators
     - react-icons instead of material-ui icons
     - Image Optimization - Image Component
+    - Infinite Scroll for country list
     - SEO fixes
     - Context API for maintaining filtered state
 
