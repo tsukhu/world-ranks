@@ -1,6 +1,14 @@
 .counts {
   margin: 12px 0;
   color: var(--text-color-secondary);
+  display: flex;
+  font-size: large;
+}
+
+.counts_value {
+  margin: 0 4px;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 
