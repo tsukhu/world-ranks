@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { IconContext } from "react-icons";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import styles from "./CountriesTable.module.css";
@@ -101,7 +102,14 @@ const CountriesTable = ({ countries }) => {
           <Link href={`/country/${country.alpha3Code}`} key={country.name}>
             <div className={styles.row}>
               <div className={styles.flag}>
-                <img src={country.flag} alt={country.name} />
+                <Image
+                  alt={country.name}
+                  src={country.flag}
+                  layout="responsive"
+                  width="100%"
+                  height="100%"
+                  objectFit="contain"
+                />
               </div>
               <div className={styles.name}>{country.name}</div>
               <div className={styles.population}>{country.population}</div>

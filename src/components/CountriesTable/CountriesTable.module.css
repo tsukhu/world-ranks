@@ -81,10 +81,11 @@
 
 .flag {
   flex: 1;
+  margin-top: -10px;
   margin-right: 16px;
 }
 
-.flag img {
+.flag > img {
   border-radius: 2px;
   width: 100%;
 }

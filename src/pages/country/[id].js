@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
 
@@ -33,7 +34,7 @@ const Country = ({ country }) => {
             <Link
               href={{
                 pathname: "/countryInfo/",
-                query: { id: country.alpha3Code , name: country.name },
+                query: { id: country.alpha3Code, name: country.name },
               }}
             >
               <img src={country.flag} alt={country.name}></img>
@@ -110,7 +111,14 @@ const Country = ({ country }) => {
                       className={styles.details_panel_borders_country}
                       key={name}
                     >
-                      <img src={flag} alt={name} />
+                      <Image
+                        alt={name}
+                        src={flag}
+                        layout="responsive"
+                        width="100%"
+                        height="100%"
+                        objectFit="contain"
+                      />
                       <div className={styles.details_panel_borders_name}>
                         {name}
                       </div>
