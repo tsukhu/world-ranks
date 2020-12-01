@@ -2,7 +2,13 @@ import Layout from "../../components/Layout/Layout";
 import Maps from "../../components/Maps/Maps";
 import styles from "./CountryInfo.module.css";
 
-const CountryInfo = ({ country }) => {
+const CountryInfo = ({ country, id, error }) => {
+  if (error)
+    return (
+      <Layout title={id}>
+        <div className={styles.overview_panel}> {error} </div>
+      </Layout>
+    );
   const {
     name,
     region,
@@ -14,7 +20,6 @@ const CountryInfo = ({ country }) => {
     latitude,
   } = country;
 
-  console.log(country);
   return (
     <Layout title={name}>
       <div className={styles.container}>
@@ -26,7 +31,6 @@ const CountryInfo = ({ country }) => {
 
             <h1 className={styles.overview_name}>{name}</h1>
             <div className={styles.overview_region}>{region.value}</div>
-            <div className={styles.overview_region}>{adminregion.value}</div>
           </div>
         </div>
         <div className={styles.container_right}>
@@ -58,19 +62,31 @@ const CountryInfo = ({ country }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const { id } = query;
-  console.log(id);
+  const { id, name } = query;
 
   const res = await fetch(
     `http://api.worldbank.org/v2/country/${id}?format=json`
   );
 
   const country = await res.json();
-  return {
-    props: {
-      country: country[1][0],
-    },
-  };
+
+  if (country[0] && country[0].message) {
+    return {
+      props: {
+        country: {},
+        id,
+        error: `World Bank information for ${name} is not available`,
+      },
+    };
+  } else {
+    return {
+      props: {
+        country: country[1][0],
+        id,
+        error: false,
+      },
+    };
+  }
 }
 
 export default CountryInfo;

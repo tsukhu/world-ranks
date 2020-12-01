@@ -33,7 +33,7 @@ const Country = ({ country }) => {
             <Link
               href={{
                 pathname: "/countryInfo/",
-                query: { id: country.alpha3Code },
+                query: { id: country.alpha3Code , name: country.name },
               }}
             >
               <img src={country.flag} alt={country.name}></img>
