@@ -12,7 +12,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
       localStorage.getItem("theme")
     );
 
-    setTheme(localStorage.getItem("theme"));
+    setTheme(localStorage.getItem("theme") || "light");
   }, []);
 
   const switchTheme = () => {

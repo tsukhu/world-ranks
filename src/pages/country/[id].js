@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
 
@@ -28,9 +29,15 @@ const Country = ({ country }) => {
     <Layout title={country.name}>
       <div className={styles.container}>
         <div className={styles.container_left}>
-          {" "}
           <div className={styles.overview_panel}>
-            <img src={country.flag} alt={country.name}></img>
+            <Link
+              href={{
+                pathname: "/countryInfo/",
+                query: { id: country.alpha3Code },
+              }}
+            >
+              <img src={country.flag} alt={country.name}></img>
+            </Link>
 
             <h1 className={styles.overview_name}>{country.name}</h1>
             <div className={styles.overview_region}>{country.region}</div>
@@ -56,13 +63,6 @@ const Country = ({ country }) => {
               <div className={styles.details_panel_label}>Capital</div>
               <div className={styles.details_panel_value}>
                 {country.capital}
-              </div>
-            </div>
-
-            <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Subregion</div>
-              <div className={styles.details_panel_value}>
-                {country.subregion}
               </div>
             </div>
 

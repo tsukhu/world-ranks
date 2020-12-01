@@ -1,4 +1,4 @@
-.overview_panel img {
+.overview_panel_map {
   width: 100%;
   border-radius: 4px;
 }
@@ -44,6 +44,7 @@
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
   border-radius: 8px;
+  padding-bottom: 20px;
 }
 
 .details_panel_heading {
