@@ -3,7 +3,7 @@
   --text-color: #124a63;
   --text-color-secondary: #525252;
 
-  --primary-color: #105B5B;
+  --primary-color: #105b5b;
 
   --background-color: #f9f9f9;
   --background-color-dark: #eef3f6;
@@ -42,4 +42,24 @@ a {
   box-sizing: border-box;
   color: inherit;
   font: inherit;
+}
+
+/* The emerging W3C standard
+   that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color) var(--background-color);
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 20px;
+  border: 3px solid var(--background-color);
 }

@@ -40,7 +40,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
       </Head>
 
       <header className={styles.header}>
-        <Link href="/">
+        <Link href="/" passHref>
           <Logo/>
         </Link>
 

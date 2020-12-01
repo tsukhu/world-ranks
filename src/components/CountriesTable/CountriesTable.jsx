@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconContext } from "react-icons";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "./CountriesTable.module.css";
 
 const orderBy = (countries, value, direction) => {
@@ -37,9 +38,17 @@ const SortArrow = ({ direction }) => {
 };
 
 const CountriesTable = ({ countries }) => {
+  const PER_PAGE = 4;
   const [direction, setDirection] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentList, setCurrentList] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
   const [value, setValue] = useState();
   const orderedCountries = orderBy(countries, value, direction);
+
+  useEffect(() => {
+    fetchMoreData();
+  }, []);
 
   const setValueAndDirection = (value) => {
     switchDirection();
@@ -57,6 +66,22 @@ const CountriesTable = ({ countries }) => {
       setDirection(null);
     }
   };
+
+  const fetchMoreData = () => {
+    if (currentList.length >= orderedCountries.length) {
+      setHasMore(false);
+      return;
+    }
+    addNextPage();
+  };
+
+  const addNextPage = () => {
+    const offset = currentPage * PER_PAGE;
+    const currentPageData = orderedCountries.slice(offset, offset + PER_PAGE);
+    setCurrentList((items) => items.concat(currentPageData));
+    setCurrentPage(currentPage + 1);
+  };
+
   return (
     <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
       <div className={styles.heading}>
@@ -96,29 +121,38 @@ const CountriesTable = ({ countries }) => {
           {value === "gini" && <SortArrow direction={direction}></SortArrow>}
         </div>
       </div>
-
-      {orderedCountries.map((country) => {
-        return (
-          <Link href={`/country/${country.alpha3Code}`} key={country.name}>
-            <div className={styles.row}>
-              <div className={styles.flag}>
-                <Image
-                  alt={country.name}
-                  src={country.flag}
-                  layout="responsive"
-                  width="100%"
-                  height="100%"
-                  objectFit="contain"
-                />
-              </div>
-              <div className={styles.name}>{country.name}</div>
-              <div className={styles.population}>{country.population}</div>
-              <div className={styles.area}>{country.area || 0} </div>
-              <div className={styles.gini}>{country.gini || 0} %</div>
-            </div>
-          </Link>
-        );
-      })}
+      <div id="scrollableDiv" style={{ height: 350, overflow: "auto" }}>
+        <InfiniteScroll
+          dataLength={currentList.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          scrollableTarget="scrollableDiv"
+        >
+          {currentList.map((country) => {
+            return (
+              <Link href={`/country/${country.alpha3Code}`} key={country.name}>
+                <div className={styles.row}>
+                  <div className={styles.flag}>
+                    <Image
+                      alt={country.name}
+                      src={country.flag}
+                      layout="responsive"
+                      width="100%"
+                      height="100%"
+                      objectFit="contain"
+                    />
+                  </div>
+                  <div className={styles.name}>{country.name}</div>
+                  <div className={styles.population}>{country.population}</div>
+                  <div className={styles.area}>{country.area || 0} </div>
+                  <div className={styles.gini}>{country.gini || 0} %</div>
+                </div>
+              </Link>
+            );
+          })}
+        </InfiniteScroll>
+      </div>
     </IconContext.Provider>
   );
 };
