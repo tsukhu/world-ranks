@@ -23,10 +23,11 @@ export default function Home({ countries }) {
       <div className={styles.inputContainer}>
         <div className={styles.counts}>Found {countries.length} countries</div>
         <div className={styles.input}>
-          {" "}
           <SearchInput
             placeholder="Filter by Name, Region or Sub Region"
             onChange={onInputChange}
+            aria-label="Filter countries"
+            aria-placeholder="Filter by Name, Region or Sub Region"
           />
         </div>
       </div>

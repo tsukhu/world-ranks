@@ -60,14 +60,14 @@ const CountriesTable = ({ countries }) => {
     <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
       <div className={styles.heading}>
         <div className={styles.heading_flag}></div>
-        <button
+        <div
           className={styles.heading_name}
           onClick={() => setValueAndDirection("name")}
         >
           <div>Name</div>
           {value === "name" && <SortArrow direction={direction}></SortArrow>}
-        </button>
-        <button
+        </div>
+        <div
           className={styles.heading_population}
           onClick={() => setValueAndDirection("population")}
         >
@@ -75,9 +75,9 @@ const CountriesTable = ({ countries }) => {
           {value === "population" && (
             <SortArrow direction={direction}></SortArrow>
           )}
-        </button>
+        </div>
 
-        <button
+        <div
           className={styles.heading_area}
           onClick={() => setValueAndDirection("area")}
         >
@@ -85,15 +85,15 @@ const CountriesTable = ({ countries }) => {
             Area (km <sup style={{ fontSize: "0.5rem" }}>2</sup>)
           </div>
           {value === "area" && <SortArrow direction={direction}></SortArrow>}
-        </button>
+        </div>
 
-        <button
+        <div
           className={styles.heading_gini}
           onClick={() => setValueAndDirection("gini")}
         >
           <div>Gini</div>
           {value === "gini" && <SortArrow direction={direction}></SortArrow>}
-        </button>
+        </div>
       </div>
 
       {orderedCountries.map((country) => {

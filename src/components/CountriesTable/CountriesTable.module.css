@@ -3,7 +3,7 @@
   padding: 20px;
 }
 
-.heading button {
+.heading div{
   border: none;
   background-color: transparent;
   outline: none;
@@ -21,7 +21,7 @@
 .heading_gini {
   flex: 4;
   color: var(--text-color-secondary);
-  font-weight: 500;
+  font-weight: 700;
 
   display: flex;
   justify-content: center;
@@ -30,7 +30,9 @@
 
 .heading_name {
   justify-content: flex-start;
+  cursor: pointer;
 }
+
 
 .heading_arrow {
   color: var(--primary-color);
