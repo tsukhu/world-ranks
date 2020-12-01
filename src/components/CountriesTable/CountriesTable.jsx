@@ -121,7 +121,7 @@ const CountriesTable = ({ countries }) => {
           {value === "gini" && <SortArrow direction={direction}></SortArrow>}
         </div>
       </div>
-      <div id="scrollableDiv" style={{ height: 350, overflow: "auto" }}>
+      <div id="scrollableDiv" className={styles.list}>
         <InfiniteScroll
           dataLength={currentList.length}
           next={fetchMoreData}
