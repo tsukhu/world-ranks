@@ -1,10 +1,8 @@
-import { useRef } from 'react';
 import Layout from "../../components/Layout/Layout";
 import Maps from "../../components/Maps/Maps";
 import styles from "./CountryInfo.module.css";
 
 const CountryInfo = ({ country }) => {
-  const targetRef = useRef();
   const {
     name,
     region,
