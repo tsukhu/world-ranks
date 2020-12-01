@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Brightness6Rounded } from "@material-ui/icons";
+import { MdBrightness6 } from "react-icons/md";
+import { IconContext } from "react-icons";
 import Head from "next/head";
 import Link from "next/link";
 import styles from "./Layout.module.css";
@@ -29,6 +30,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
     document.documentElement.setAttribute("data-theme", theme);
   };
   return (
+    <IconContext.Provider value={{ style: { fontSize: "1.5em" } }}>
     <div className={styles.container}>
       <Head>
         <title>{title}</title>
@@ -65,13 +67,14 @@ const Layout = ({ children, title = "World Ranks" }) => {
         </Link>
 
         <button className={styles.themeSwitcher} onClick={switchTheme}>
-          <Brightness6Rounded />
+          <MdBrightness6 />
         </button>
       </header>
       <main className={styles.main}>{children}</main>
 
       <footer className={styles.footer}>TKS Next Experiments</footer>
     </div>
+    </IconContext.Provider>
   );
 };
 

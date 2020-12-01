@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
-import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
-import KeyboardArrowUpRounded from "@material-ui/icons/KeyboardArrowUpRounded";
+import { IconContext } from "react-icons";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import styles from "./CountriesTable.module.css";
 
 const orderBy = (countries, value, direction) => {
@@ -23,13 +23,13 @@ const SortArrow = ({ direction }) => {
   if (direction === "desc") {
     return (
       <div className={styles.heading_arrow}>
-        <KeyboardArrowDownRounded color="inherit" />
+        <MdKeyboardArrowDown color="inherit" />
       </div>
     );
   } else {
     return (
       <div className={styles.heading_arrow}>
-        <KeyboardArrowUpRounded color="inherit" />
+        <MdKeyboardArrowUp color="inherit" />
       </div>
     );
   }
@@ -57,7 +57,7 @@ const CountriesTable = ({ countries }) => {
     }
   };
   return (
-    <div>
+    <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
       <div className={styles.heading}>
         <div className={styles.heading_flag}></div>
         <button
@@ -111,7 +111,7 @@ const CountriesTable = ({ countries }) => {
           </Link>
         );
       })}
-    </div>
+    </IconContext.Provider>
   );
 };
 

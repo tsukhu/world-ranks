@@ -9,9 +9,12 @@ Experiments with NextJS 10. This is based one of the best live coding video tuto
 
 Based on and extended from the live coding video by [Thu Nghiem](https://www.youtube.com/watch?v=v8o9iJU5hEA). This has been extended to try out different features of NextJS 10.
  - Additions and changes made   
+    - Minor bug fixes
     - Styling adjustments
     - Mapbox support
     - Worldbank API added using `getServerSideProps`. Click on the country flag in the country detailed view .
+    - Added progress indicators
+    - react icons for all needs
 
 
 ## Getting Started
