@@ -20,15 +20,15 @@ export default function Home({ countries }) {
     <Layout>
       <div className={styles.inputContainer}>
         <div className={styles.counts}>
-          Found <div className={styles.counts_value}>{countries.length}</div>{" "}
-          countries
+          <div>Found</div> <div className={styles.counts_value}>{countries.length}</div>
+          <div>countries</div>
         </div>
         <div className={styles.input}>
           <SearchInput
-            placeholder="Filter by Name, Region or Sub Region"
+            placeholder="Filter"
             onChange={onInputChange}
             aria-label="Filter countries"
-            aria-placeholder="Filter by Name, Region or Sub Region"
+            aria-placeholder="Filter"
             value={filteredText}
           />
         </div>
