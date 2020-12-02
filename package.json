@@ -15,5 +15,8 @@
     "react-icons": "^4.1.0",
     "react-infinite-scroll-component": "^5.1.0",
     "react-map-gl": "^5.2.10"
+  },
+  "devDependencies": {
+    "next-secure-headers": "^2.0.0"
   }
 }
