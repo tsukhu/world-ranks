@@ -2,13 +2,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Objective
 
-Experiments with NextJS 10. This is based one of the best live coding video tutorials by [Thu Nghiem](https://www.youtube.com/watch?v=v8o9iJU5hEA)
+Experiments with NextJS 10.
 
+. This has been extended to try out different features of NextJS 10.
 
-## Credits
-
-Based on and extended from the live coding video by [Thu Nghiem](https://www.youtube.com/watch?v=v8o9iJU5hEA). This has been extended to try out different features of NextJS 10.
- - Additions and changes made   
+### Additions and changes made   
     - Minor bug fixes
     - Styling adjustments
     - Mapbox support
@@ -19,7 +17,19 @@ Based on and extended from the live coding video by [Thu Nghiem](https://www.you
     - Infinite Scroll for country list
     - SEO fixes
     - Context API for maintaining filtered state
+    - Security Headers
+    - Performance improvements - Image Lazy Loading , Pagination (Infinite Scroll)
 
+## Current Results
+
+    - Lighthouse:
+        - Desktop ~100%
+        - Mobile  ~89%
+    - Web Page Test
+        - Security          : A
+        - First Byte Time   : A
+        - FCP               : ~1 sec
+        - Speed Index       : ~1 sec
 
 ## Getting Started
 
@@ -49,3 +59,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Credits
+
+Based on and extended from the live coding video by [Thu Nghiem](https://www.youtube.com/watch?v=v8o9iJU5hEA)
