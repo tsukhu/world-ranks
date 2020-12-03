@@ -54,7 +54,7 @@ export default async (req, res) => {
     });
     res.setHeader("Content-Type", "application/json");
     res.statusCode = 200;
-    res.json(records);
+    res.json(records[0]);
   } catch (err) {
     res.statusCode = 500;
     res.json({ msg: "Something went wrong", error: err.message });
