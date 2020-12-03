@@ -1,6 +1,20 @@
+import Cors from "cors";
+import initMiddleware from "../../lib/init-middleware";
+
 import { table, minifyRecords } from "./utils/Airtable";
 
+// Initialize the cors middleware
+const cors = initMiddleware(
+  // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+  Cors({
+    // Only allow requests with GET, POST and OPTIONS
+    methods: ["GET", "OPTIONS"],
+  })
+);
+
 export default async (req, res) => {
+  // Run cors
+  await cors(req, res);
   const {
     query: { url, name },
   } = req;
@@ -10,6 +24,8 @@ export default async (req, res) => {
       let finalrecords = [];
       table
         .select({
+          maxRecords: 100,
+          sort: [{field: "creationTime", direction: "asc"}],
           filterByFormula: `IF(
             AND(
               ${url ? `{url} = ${url}` : 1},

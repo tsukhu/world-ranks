@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "airtable": "^0.10.1",
+    "cors": "^2.8.5",
     "next": "^10.0.3",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
