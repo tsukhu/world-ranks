@@ -24,7 +24,7 @@ export default async (req, res) => {
       let finalrecords = [];
       table
         .select({
-          maxRecords: 100,
+          maxRecords: 1000,
           sort: [{field: "creationTime", direction: "asc"}],
           filterByFormula: `IF(
             AND(
