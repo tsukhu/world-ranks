@@ -17,8 +17,25 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export function reportWebVitals(metric) {
-  console.log(metric)
+export function reportWebVitals({ id, name, label, value, startTime }) {
+  const body = JSON.stringify({
+    id,
+    name,
+    label,
+    value,
+    startTime,
+    url: `${Router.asPath}`,
+  });
+  const url = "/api/createWebVital";
+
+  fetch(url, {
+    body: body,
+    method: "POST",
+    keepalive: true,
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
 }
 
 export default MyApp;

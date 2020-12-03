@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "airtable": "^0.10.1",
     "next": "^10.0.3",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
