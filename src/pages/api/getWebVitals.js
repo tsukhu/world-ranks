@@ -25,7 +25,7 @@ export default async (req, res) => {
       table
         .select({
           maxRecords: 1000,
-          sort: [{field: "creationTime", direction: "asc"}],
+          sort: [{field: "creationTime", direction: "desc"}],
           filterByFormula: `IF(
             AND(
               ${url ? `{url} = ${url}` : 1},
