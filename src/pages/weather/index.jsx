@@ -37,11 +37,15 @@ const Weather = () => {
   const { data, error, isFetching, refetch } = useQuery(
     ["weather", city],
     async () => {
-      if (!city) return null;
-      const { getCityByName } = await request(endpoint, query, {
-        name: `${city}`,
-      });
-      return getCityByName;
+      try {
+        if (!city) return null;
+        const { getCityByName } = await request(endpoint, query, {
+          name: `${city}`,
+        });
+        return getCityByName;
+      } catch (error) {
+        throw new Error(error.message);
+      }
     }
   );
 
@@ -56,9 +60,10 @@ const Weather = () => {
     <Layout title="World Weather">
       <div className={styles.inputForm}>
         <CountryForm onClick={(e) => setCity(e)} />
-        <p className={styles.loading}>{`${isFetching?"Loading ...":""}`}</p>
+        <p className={styles.loading}>{`${isFetching ? "Loading ..." : ""}`}</p>
       </div>
       <div className={styles.weather}>
+        {error && <p>Invalid City</p>}
         {!isFetching && !data && !error && <p>No City Provided</p>}
         {data && data.name && (
           <table>
