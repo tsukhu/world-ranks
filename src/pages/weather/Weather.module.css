@@ -1,0 +1,52 @@
+.weather table {
+  border: 1px solid var(--text-color);
+  border-collapse: separate;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  color: var(--text-color);
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+}
+.weather table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+}
+.weather table tr {
+  background-color: var(--background-color);
+  padding: 0.35em;
+  border: none;
+}
+.weather table th {
+  background-color: var(--background-color-dark);
+  color: var(--text-color);
+}
+.weather table th, .weather table td {
+  padding: 0.625em;
+  text-align: center;
+}
+.weather table th {
+  border: 1px solid var(--text-color);
+}
+.weather table td:first-child {
+  border-left: none;
+}
+.weather table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.inputForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 2px;
+}
+
+.loading {
+  font-size: smaller;
+  min-width: 100px;
+  padding-left: 4px;
+}

@@ -19,6 +19,7 @@ Experiments with NextJS 10.
     - Context API for maintaining filtered state
     - Security Headers
     - Performance improvements - Image Lazy Loading , Pagination (Infinite Scroll)
+    - Added pure client side rendered path (/weather) that uses `react-query`
 
 ## Current Results
 

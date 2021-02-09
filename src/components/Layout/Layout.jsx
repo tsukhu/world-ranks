@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { MdBrightness6 } from "react-icons/md";
+import { MdBrightness6, MdTimeline } from "react-icons/md";
 import { IconContext } from "react-icons";
 import Head from "next/head";
 import Link from "next/link";
-import Logo from './Logo';
+import Logo from "./Logo";
 import styles from "./Layout.module.css";
 
 const Layout = ({ children, title = "World Ranks" }) => {
@@ -32,26 +32,33 @@ const Layout = ({ children, title = "World Ranks" }) => {
   };
   return (
     <IconContext.Provider value={{ style: { fontSize: "1.5em" } }}>
-    <div className={styles.container}>
-      <Head>
-        <title>{title}</title>
-        <meta name="Description" content="World Ranking and Stats application"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <div className={styles.container}>
+        <Head>
+          <title>{title}</title>
+          <meta
+            name="Description"
+            content="World Ranking and Stats application"
+          ></meta>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <header className={styles.header}>
-        <Link href="/" passHref>
-          <Logo/>
-        </Link>
+        <header className={styles.header}>
+          <Link href="/" className={styles.logo}>
+            <Logo />
+          </Link>
+          <div className={styles.menuWrapper}>
+            <Link href="/weather" >
+              <a className={styles.themeSwitcher}><MdTimeline /></a>
+            </Link>
+            <div className={styles.themeSwitcher} onClick={switchTheme}>
+              <MdBrightness6 />
+            </div>
+          </div>
+        </header>
+        <main className={styles.main}>{children}</main>
 
-        <div className={styles.themeSwitcher} onClick={switchTheme}>
-          <MdBrightness6 />
-        </div>
-      </header>
-      <main className={styles.main}>{children}</main>
-
-      <footer className={styles.footer}>TKS Next Experiments</footer>
-    </div>
+        <footer className={styles.footer}>TKS Next Experiments</footer>
+      </div>
     </IconContext.Provider>
   );
 };

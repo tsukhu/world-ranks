@@ -13,13 +13,25 @@
   display: flex;
   align-items: center;
   margin-bottom: 32px;
-  justify-content: space-between;
 }
 
+.logo{
+  flex: 1;
+}
 .header:hover {
   cursor: pointer;
 }
 
+.menuWrapper{
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menuItem {
+ width: 40;
+}
 .footer {
   margin-top: 32px;
   text-align: center;
@@ -29,8 +41,7 @@
 .themeSwitcher {
   border: none;
   background-color: transparent;
-  padding: 0;
-
+  padding: 0 4px;
   color: var(--text-color-secondary);
   margin-left: 4px;
 
