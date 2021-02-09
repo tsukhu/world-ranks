@@ -46,6 +46,10 @@ const Weather = () => {
       } catch (error) {
         throw new Error(error.message);
       }
+    },
+    {
+      // The query will not execute until the city exists
+      enabled: !!city,
     }
   );
 
