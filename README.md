@@ -64,7 +64,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Types generated using apollo
 
 ```sh
-apollo codegen:generate  --includes=src/**/*.jsx --endpoint https://graphql-weather-api.herokuapp.com --target typescript --tagName=gql --outputFlat src/generated
+apollo codegen:generate  
+    --includes=src/**/*.tsx 
+    --endpoint https://graphql-weather-api.herokuapp.com 
+    --target typescript 
+    --tagName=gql 
+    --outputFlat src/generated
 ```
 
 ## Credits
