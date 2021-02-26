@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-const Logo = forwardRef((props, ref) => {
+const Logo = forwardRef((props, ref:any) => {
   return (
     <div ref={ref}>
       <svg

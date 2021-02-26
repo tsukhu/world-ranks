@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import ReactMapGL from "react-map-gl";
 
-const Maps = ({ latitude, longitude, parentDimensions }) => {
+const Maps = ({
+  latitude,
+  longitude,
+  parentDimensions,
+}: {
+  latitude: number,
+  longitude: number,
+  parentDimensions?: number,
+}) => {
   const [viewport, setViewport] = useState({
     latitude: 41.5868,
     longitude: -93.625,

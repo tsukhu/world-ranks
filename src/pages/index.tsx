@@ -34,7 +34,7 @@ export default function Home({ countries }) {
         </div>
       </div>
 
-      <CountriesTable countries={filteredCountries} />
+      <CountriesTable />
     </Layout>
   );
 }

@@ -6,10 +6,10 @@ const CountryContext = createContext({
   direction: undefined,
   countries: [],
   filteredCountries: [],
-  setValue: () => {},
-  setDirection: () => {},
-  setFilteredCountries: () => {},
-  setFilteredText: () => {},
+  setValue: (val: any) => {},
+  setDirection: (val: any) => {},
+  setFilteredCountries: (val: any) => {},
+  setFilteredText: (val: any) => {},
 });
 
 export default CountryContext;

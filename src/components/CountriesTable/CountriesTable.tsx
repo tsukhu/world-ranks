@@ -61,7 +61,7 @@ const CountriesTable = () => {
     setHasMore(true);
   }, [filteredCountries, value, direction]);
 
-  const setValueAndDirection = (value) => {
+  const setValueAndDirection = (value: any) => {
     switchDirection();
     setValue(value);
   };

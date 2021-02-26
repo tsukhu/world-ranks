@@ -43,12 +43,16 @@ const Layout = ({ children, title = "World Ranks" }) => {
         </Head>
 
         <header className={styles.header}>
-          <Link href="/" className={styles.logo}>
-            <Logo />
+          <Link href="/">
+            <div className={styles.logo}>
+              <Logo />
+            </div>
           </Link>
           <div className={styles.menuWrapper}>
-            <Link href="/weather" >
-              <a className={styles.themeSwitcher}><MdTimeline /></a>
+            <Link href="/weather">
+              <a className={styles.themeSwitcher}>
+                <MdTimeline />
+              </a>
             </Link>
             <div className={styles.themeSwitcher} onClick={switchTheme}>
               <MdBrightness6 />
