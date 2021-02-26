@@ -61,6 +61,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Types generated using apollo
+
+```sh
+apollo codegen:generate  --includes=src/**/*.jsx --endpoint https://graphql-weather-api.herokuapp.com --target typescript --tagName=gql --outputFlat src/generated
+```
 
 ## Credits
 

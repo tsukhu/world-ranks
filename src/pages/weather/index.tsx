@@ -3,11 +3,12 @@ import Layout from "../../components/Layout/Layout";
 import CountryForm from "../../components/CountryForm/CountryForm";
 import { request, gql } from "graphql-request";
 import { useQuery } from "react-query";
+import { WeatherQuery_getCityByName } from "../../generated/WeatherQuery";
 
 const endpoint = "https://graphql-weather-api.herokuapp.com/";
 import styles from "./Weather.module.css";
 const query = gql`
-  query($name: String!) {
+  query WeatherQuery($name: String!) {
     getCityByName(name: $name) {
       id
       name
@@ -27,32 +28,38 @@ const query = gql`
     }
   }
 `;
+
 const temperatureConverter = (valNum) => {
   valNum = parseFloat(valNum);
   return (valNum - 273.15).toFixed(2);
 };
 
-const Weather = () => {
-  const [city, setCity] = React.useState();
-  const { data, error, isFetching, refetch } = useQuery(
+const getWeatherForCity = async (city: string) => {
+  try {
+    if (!city) return null;
+    const { getCityByName } = await request(endpoint, query, {
+      name: `${city}`,
+    });
+    return getCityByName;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const useReactQuery = (city: string) => {
+  return useQuery<WeatherQuery_getCityByName, Error>(
     ["weather", city],
-    async () => {
-      try {
-        if (!city) return null;
-        const { getCityByName } = await request(endpoint, query, {
-          name: `${city}`,
-        });
-        return getCityByName;
-      } catch (error) {
-        throw new Error(error.message);
-      }
-    },
+    () => getWeatherForCity(city),
     {
       // The query will not execute until the city exists
       enabled: !!city,
     }
   );
+};
 
+const Weather = () => {
+  const [city, setCity] = React.useState();
+  const { data, error, isFetching, refetch } = useReactQuery(city);
   React.useEffect(() => {
     if (city) {
       refetch();
