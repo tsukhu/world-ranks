@@ -20,6 +20,8 @@ Experiments with NextJS 10.
     - Security Headers
     - Performance improvements - Image Lazy Loading , Pagination (Infinite Scroll)
     - Added pure client side rendered path (/weather) that uses `react-query`
+    - Moved to Typescript
+    - Types code gen for graphql using apollo client
 
 ## Current Results
 
