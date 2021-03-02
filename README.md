@@ -22,6 +22,7 @@ Experiments with NextJS 10.
     - Added pure client side rendered path (/weather) that uses `react-query`
     - Moved to Typescript
     - Types code gen for graphql using apollo client
+    - i18n based router
 
 ## Current Results
 
