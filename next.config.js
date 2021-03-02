@@ -6,4 +6,8 @@ module.exports = {
   images: {
     domains: ["restcountries.eu"],
   },
+  i18n: {
+    locales: ['en-US', 'fr'],
+    defaultLocale: 'en-US',
+  },
 };

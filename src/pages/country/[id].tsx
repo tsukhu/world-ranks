@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
+import en from "../../../locales/en-US";
+import fr from "../../../locales/fr";
 
 const getCountry = async (id) => {
   const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -11,7 +13,8 @@ const getCountry = async (id) => {
   return country;
 };
 
-const Country = ({ country }) => {
+const Country = ({ country,locale }) => {
+  const t = locale === "en-US" ? en : fr;
   const [borders, setBorders] = useState([]);
 
   const getBorders = async () => {
@@ -36,6 +39,7 @@ const Country = ({ country }) => {
                 pathname: "/countryInfo/",
                 query: { id: country.alpha3Code, name: country.name },
               }}
+              locale={locale}
             >
               <img src={country.flag} alt={country.name}></img>
             </Link>
@@ -48,61 +52,61 @@ const Country = ({ country }) => {
                 <div className={styles.overview_value}>
                   {country.population}
                 </div>
-                <div className={styles.overview_label}>Population</div>
+                <div className={styles.overview_label}>{t.population}</div>
               </div>
               <div className={styles.overview_area}>
                 <div className={styles.overview_value}>{country.area}</div>
-                <div className={styles.overview_label}>Area</div>
+                <div className={styles.overview_label}>{t.area}</div>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.container_right}>
           <div className={styles.details_panel}>
-            <h4 className={styles.details_panel_heading}>Details</h4>
+            <h4 className={styles.details_panel_heading}>{t.details}</h4>
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Capital</div>
+              <div className={styles.details_panel_label}>{t.capital}</div>
               <div className={styles.details_panel_value}>
                 {country.capital}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Subregion</div>
+              <div className={styles.details_panel_label}>{t.subRegion}</div>
               <div className={styles.details_panel_value}>
                 {country.subregion}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Languages</div>
+              <div className={styles.details_panel_label}>{t.languages}</div>
               <div className={styles.details_panel_value}>
                 {country.languages.map(({ name }) => name).join(", ")}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Currencies</div>
+              <div className={styles.details_panel_label}>{t.currencies}</div>
               <div className={styles.details_panel_value}>
                 {country.currencies.map(({ name }) => name).join(", ")}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Native name</div>
+              <div className={styles.details_panel_label}>{t.nativeName}</div>
               <div className={styles.details_panel_value}>
                 {country.nativeName}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Gini</div>
+              <div className={styles.details_panel_label}>{t.gini}</div>
               <div className={styles.details_panel_value}>{country.gini} %</div>
             </div>
 
             <div className={styles.details_panel_borders}>
               <div className={styles.details_panel_borders_label}>
-                Neighbouring Countries
+                {t.neighbourHood}
               </div>
               <div className={styles.details_panel_borders_container}>
                 {borders.map(({ flag, name }) => {
@@ -136,25 +140,27 @@ const Country = ({ country }) => {
 
 export default Country;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async ({ locales }) => {
   const res = await fetch("https://restcountries.eu/rest/v2/all");
 
   const countries = await res.json();
 
-  const paths = countries.map((country) => ({
-    params: { id: country.alpha3Code },
-  }));
+  const paths = locales.map((locale) => countries.map((country) => ({
+    params: { id: country.alpha3Code }, locale
+  }))).flat(1);
+
   return {
     paths,
     fallback: false,
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, locale }) => {
   const country = await getCountry(params.id);
   return {
     props: {
       country,
+      locale,
     },
   };
 };

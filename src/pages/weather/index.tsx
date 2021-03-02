@@ -1,10 +1,12 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import Layout from "../../components/Layout/Layout";
 import CountryForm from "../../components/CountryForm/CountryForm";
 import { request, gql } from "graphql-request";
 import { useQuery } from "react-query";
 import { WeatherQuery_getCityByName } from "../../generated/WeatherQuery";
-
+import en from "../../../locales/en-US";
+import fr from "../../../locales/fr";
 const endpoint = "https://graphql-weather-api.herokuapp.com/";
 import styles from "./Weather.module.css";
 const query = gql`
@@ -60,13 +62,16 @@ const useReactQuery = (city: string) => {
 const Weather = () => {
   const [city, setCity] = React.useState();
   const { data, error, isFetching, refetch } = useReactQuery(city);
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === "en-US" ? en : fr;
+
   React.useEffect(() => {
     if (city) {
       refetch();
     }
   }, [city]);
 
-  console.log(data);
   return (
     <Layout title="World Weather">
       <div className={styles.inputForm}>
@@ -75,15 +80,15 @@ const Weather = () => {
       </div>
       <div className={styles.weather}>
         {error && <p>Invalid City</p>}
-        {!isFetching && !data && !error && <p>No City Provided</p>}
+        {!isFetching && !data && !error && <p>{t.noCity}</p>}
         {data && data.name && (
           <table>
             <thead>
               <tr>
-                <th scope="col">City</th>
-                <th scope="col">Summary</th>
-                <th scope="col">Actual</th>
-                <th scope="col">Feels Like</th>
+                <th scope="col">{t.city}</th>
+                <th scope="col">{t.summary}</th>
+                <th scope="col">{t.actual}</th>
+                <th scope="col">{t.feelsLike}</th>
               </tr>
             </thead>
             <tbody>

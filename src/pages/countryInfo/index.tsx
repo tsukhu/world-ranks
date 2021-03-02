@@ -1,8 +1,14 @@
 import Layout from "../../components/Layout/Layout";
 import Maps from "../../components/Maps/Maps";
 import styles from "./CountryInfo.module.css";
+import { useRouter } from "next/router";
+import en from "../../../locales/en-US";
+import fr from "../../../locales/fr";
 
 const CountryInfo = ({ country, id, error }) => {
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === "en-US" ? en : fr;
   if (error)
     return (
       <Layout title={id}>
@@ -35,21 +41,21 @@ const CountryInfo = ({ country, id, error }) => {
         </div>
         <div className={styles.container_right}>
           <div className={styles.details_panel}>
-            <h4 className={styles.details_panel_heading}>World Bank Details</h4>
+            <h4 className={styles.details_panel_heading}>{t.worldBankDetails}</h4>
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Capital</div>
+              <div className={styles.details_panel_label}>{t.capital}</div>
               <div className={styles.details_panel_value}>{capitalCity}</div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Income Level</div>
+              <div className={styles.details_panel_label}>{t.incomeLevel}</div>
               <div className={styles.details_panel_value}>
                 {incomeLevel.value}
               </div>
             </div>
 
             <div className={styles.details_panel_row}>
-              <div className={styles.details_panel_label}>Lending Type</div>
+              <div className={styles.details_panel_label}>{t.lendingType}</div>
               <div className={styles.details_panel_value}>
                 {lendingType.value}
               </div>

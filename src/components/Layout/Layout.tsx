@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { MdBrightness6, MdTimeline } from "react-icons/md";
 import { IconContext } from "react-icons";
 import Head from "next/head";
@@ -7,6 +8,8 @@ import Logo from "./Logo";
 import styles from "./Layout.module.css";
 
 const Layout = ({ children, title = "World Ranks" }) => {
+  const router = useRouter();
+  const { locale } = router;
   const [theme, setTheme] = useState("light");
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -23,6 +26,10 @@ const Layout = ({ children, title = "World Ranks" }) => {
     } else {
       saveTheme("light");
     }
+  };
+
+  const changeLanguage = (locale) => {
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   const saveTheme = (theme) => {
@@ -43,13 +50,30 @@ const Layout = ({ children, title = "World Ranks" }) => {
         </Head>
 
         <header className={styles.header}>
-          <Link href="/">
+          <Link href="/" locale={locale}>
             <div className={styles.logo}>
               <Logo />
             </div>
           </Link>
           <div className={styles.menuWrapper}>
-            <Link href="/weather">
+            <span
+              className={`${styles.locale} ${
+                locale === "en-US" ? styles.active : ""
+              }`}
+              onClick={() => changeLanguage("en-US")}
+            >
+              en
+            </span>
+            <span className={styles.locale}>|</span>
+            <span
+              className={`${styles.locale} ${
+                locale === "fr" ? styles.active : ""
+              }`}
+              onClick={() => changeLanguage("fr")}
+            >
+              fr
+            </span>
+            <Link href="/weather" locale={locale}>
               <a className={styles.themeSwitcher}>
                 <MdTimeline />
               </a>
