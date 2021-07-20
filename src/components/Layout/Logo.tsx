@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 
-const Logo = forwardRef((props, ref:any) => {
+const Logo = (props) => {
   return (
-    <div ref={ref}>
+    <div>
       <svg
         width={175}
         height={24}
@@ -25,6 +25,6 @@ const Logo = forwardRef((props, ref:any) => {
       </svg>
     </div>
   );
-});
+};
 
 export default Logo;

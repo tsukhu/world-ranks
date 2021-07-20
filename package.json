@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "airtable": "^0.11.1",
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.2",
+    "eslint": "^7.31.0",
+    "eslint-config-next": "^11.0.1",
     "next-secure-headers": "^2.0.0",
     "typescript": "^4.3.5"
   }

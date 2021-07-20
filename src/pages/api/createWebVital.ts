@@ -1,6 +1,6 @@
 import { table, minifyRecords } from "./utils/Airtable";
 
-export default async (req, res) => {
+ const createWebVital = async (req, res) => {
   const { id, name, startTime, value, label, url } = req.body;
   try {
     const createdRecords = await table.create([
@@ -27,3 +27,5 @@ export default async (req, res) => {
     res.json({ msg: err.message });
   }
 };
+
+export default createWebVital;

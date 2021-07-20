@@ -12,7 +12,7 @@ const cors = initMiddleware(
   })
 );
 
-export default async (req, res) => {
+const getWebVitals = async (req, res) => {
   // Run cors
   await cors(req, res);
   const {
@@ -60,3 +60,5 @@ export default async (req, res) => {
     res.json({ msg: "Something went wrong", error: err.message });
   }
 };
+
+export default getWebVitals;
