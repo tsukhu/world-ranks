@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import CountryContext from "./CountryContext";
 
 const CountryContextProvider = (props) => {
@@ -6,16 +6,14 @@ const CountryContextProvider = (props) => {
   const [value, setValue] = useState();
   const [filteredText, setFilteredText] = useState("");
   const { children } = props;
-  const [filteredCountries, setFilteredCountries] = useState([]);
-  const [countries, setCountries] = useState(props.countries || []);
 
-  useEffect(() => {
+  const countries = useMemo(() => {
     if (props.countries) {
-      setCountries(props.countries);
+      return props.countries;
     }
   }, [props.countries]);
-  
-  useEffect(() => {
+
+  const filteredCountries = useMemo(() => {
     if (countries) {
       const filteredCountries = countries.filter(
         (country) =>
@@ -23,7 +21,7 @@ const CountryContextProvider = (props) => {
           country.region.toLowerCase().includes(filteredText) ||
           country.subregion.toLowerCase().includes(filteredText)
       );
-      setFilteredCountries(filteredCountries);
+      return filteredCountries;
     }
   }, [countries, filteredText]);
 
@@ -37,7 +35,6 @@ const CountryContextProvider = (props) => {
         filteredText,
         setValue,
         setDirection,
-        setFilteredCountries,
         setFilteredText,
       }}
     >
