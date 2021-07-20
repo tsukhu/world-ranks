@@ -29,7 +29,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
   };
 
   const changeLanguage = (locale) => {
-    router.push(router.pathname, router.asPath, { locale });
+    router.replace(router.asPath,router.asPath, { locale });
   };
 
   const saveTheme = (theme) => {

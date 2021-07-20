@@ -18,7 +18,7 @@ const Maps = ({
 
   useEffect(() => {
     if (latitude && longitude) {
-      console.log(latitude, longitude);
+    //  console.log(latitude, longitude);
       setViewport({
         ...viewport,
         latitude,
@@ -27,7 +27,7 @@ const Maps = ({
     }
   }, []);
 
-  console.log(parentDimensions);
+ // console.log(parentDimensions);
   return (
     <>
       {viewport && (

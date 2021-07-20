@@ -41,7 +41,9 @@ const CountryInfo = ({ country, id, error }) => {
         </div>
         <div className={styles.container_right}>
           <div className={styles.details_panel}>
-            <h4 className={styles.details_panel_heading}>{t.worldBankDetails}</h4>
+            <h4 className={styles.details_panel_heading}>
+              {t.worldBankDetails}
+            </h4>
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>{t.capital}</div>
               <div className={styles.details_panel_value}>{capitalCity}</div>
@@ -69,29 +71,30 @@ const CountryInfo = ({ country, id, error }) => {
 
 export async function getServerSideProps({ query }) {
   const { id, name } = query;
+  if (id && name) {
+    const res = await fetch(
+      `http://api.worldbank.org/v2/country/${id}?format=json`
+    );
 
-  const res = await fetch(
-    `http://api.worldbank.org/v2/country/${id}?format=json`
-  );
+    const country = await res.json();
 
-  const country = await res.json();
-
-  if (country[0] && country[0].message) {
-    return {
-      props: {
-        country: {},
-        id,
-        error: `World Bank information for ${name} is not available`,
-      },
-    };
-  } else {
-    return {
-      props: {
-        country: country[1][0],
-        id,
-        error: false,
-      },
-    };
+    if (country[0] && country[0].message) {
+      return {
+        props: {
+          country: {},
+          id: id || null,
+          error: `World Bank information for ${name} is not available`,
+        },
+      };
+    } else {
+      return {
+        props: {
+          country: country[1][0],
+          id: id || null,
+          error: false,
+        },
+      };
+    }
   }
 }
 
