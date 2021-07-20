@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -43,13 +43,8 @@ const SortArrow = ({ direction }) => {
 
 const CountriesTable = () => {
   const PER_PAGE = 4;
-  const {
-    filteredCountries,
-    value,
-    direction,
-    setDirection,
-    setValue,
-  } = useContext(CountryContext);
+  const { filteredCountries, value, direction, setDirection, setValue } =
+    useContext(CountryContext);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentList, setCurrentList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -66,10 +61,10 @@ const CountriesTable = () => {
     setHasMore(true);
   }, [filteredCountries, value, direction]);
 
-  const setValueAndDirection = (value: any) => {
+  const setValueAndDirection = useCallback((value: any) => {
     switchDirection();
     setValue(value);
-  };
+  }, []);
 
   const switchDirection = () => {
     if (!direction) {
@@ -99,7 +94,7 @@ const CountriesTable = () => {
   };
 
   return (
-    <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
+    <div className={styles.tableContainer}>
       <InfiniteScroll
         dataLength={currentList.length}
         next={fetchMoreData}
@@ -130,7 +125,9 @@ const CountriesTable = () => {
             onClick={() => setValueAndDirection("area")}
           >
             <div>
-              {`${t.area} (km `}<sup style={{ fontSize: "0.5rem" }}>2</sup>{')'}
+              {`${t.area} (km `}
+              <sup style={{ fontSize: "0.5rem" }}>2</sup>
+              {")"}
             </div>
             {value === "area" && <SortArrow direction={direction}></SortArrow>}
           </div>
@@ -171,7 +168,7 @@ const CountriesTable = () => {
           );
         })}
       </InfiniteScroll>
-    </IconContext.Provider>
+    </div>
   );
 };
 

@@ -29,7 +29,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
   };
 
   const changeLanguage = (locale) => {
-    router.replace(router.asPath,router.asPath, { locale });
+    router.replace(router.asPath, router.asPath, { locale });
   };
 
   const saveTheme = (theme) => {
@@ -38,56 +38,54 @@ const Layout = ({ children, title = "World Ranks" }) => {
     document.documentElement.setAttribute("data-theme", theme);
   };
   return (
-    <IconContext.Provider value={{ style: { fontSize: "1.5em" } }}>
-      <div className={styles.container}>
-        <Head>
-          <title>{title}</title>
-          <meta
-            name="Description"
-            content="World Ranking and Stats application"
-          ></meta>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+    <div className={styles.container}>
+      <Head>
+        <title>{title}</title>
+        <meta
+          name="Description"
+          content="World Ranking and Stats application"
+        ></meta>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <header className={styles.header}>
-          <Link href="/" locale={locale}>
-            <div className={styles.logo}>
-              <Logo />
-            </div>
-          </Link>
-          <div className={styles.menuWrapper}>
-            <span
-              className={`${styles.locale} ${
-                locale === "en-US" ? styles.active : ""
-              }`}
-              onClick={() => changeLanguage("en-US")}
-            >
-              en
-            </span>
-            <span className={styles.locale}>|</span>
-            <span
-              className={`${styles.locale} ${
-                locale === "fr" ? styles.active : ""
-              }`}
-              onClick={() => changeLanguage("fr")}
-            >
-              fr
-            </span>
-            <Link href="/weather" locale={locale}>
-              <a className={styles.themeSwitcher}>
-                <MdTimeline />
-              </a>
-            </Link>
-            <div className={styles.themeSwitcher} onClick={switchTheme}>
-              <MdBrightness6 />
-            </div>
+      <header className={styles.header}>
+        <Link href="/" locale={locale}>
+          <div className={styles.logo}>
+            <Logo />
           </div>
-        </header>
-        <main className={styles.main}>{children}</main>
+        </Link>
+        <div className={styles.menuWrapper}>
+          <span
+            className={`${styles.locale} ${
+              locale === "en-US" ? styles.active : ""
+            }`}
+            onClick={() => changeLanguage("en-US")}
+          >
+            en
+          </span>
+          <span className={styles.locale}>|</span>
+          <span
+            className={`${styles.locale} ${
+              locale === "fr" ? styles.active : ""
+            }`}
+            onClick={() => changeLanguage("fr")}
+          >
+            fr
+          </span>
+          <Link href="/weather" locale={locale}>
+            <a className={styles.themeSwitcher}>
+              <MdTimeline />
+            </a>
+          </Link>
+          <div className={styles.themeSwitcher} onClick={switchTheme}>
+            <MdBrightness6 />
+          </div>
+        </div>
+      </header>
+      <main className={styles.main}>{children}</main>
 
-        <footer className={styles.footer}>TKS Next Experiments</footer>
-      </div>
-    </IconContext.Provider>
+      <footer className={styles.footer}>TKS Next Experiments</footer>
+    </div>
   );
 };
 
