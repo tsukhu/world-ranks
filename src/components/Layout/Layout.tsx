@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import { MdBrightness6, MdTimeline } from "react-icons/md";
 import { IconContext } from "react-icons";
@@ -28,9 +28,9 @@ const Layout = ({ children, title = "World Ranks" }) => {
     }
   };
 
-  const changeLanguage = (locale) => {
+  const changeLanguage = useCallback((locale) => {
     router.replace(router.asPath, router.asPath, { locale });
-  };
+  },[]);
 
   const saveTheme = (theme) => {
     setTheme(theme);
@@ -49,7 +49,7 @@ const Layout = ({ children, title = "World Ranks" }) => {
       </Head>
 
       <header className={styles.header}>
-        <Link href="/" locale={locale}>
+        <Link href="/" locale={locale} aria-label="Home">
           <div className={styles.logo}>
             <Logo />
           </div>
@@ -73,11 +73,11 @@ const Layout = ({ children, title = "World Ranks" }) => {
             fr
           </span>
           <Link href="/weather" locale={locale}>
-            <a className={styles.themeSwitcher}>
+            <a className={styles.themeSwitcher} aria-label="Weather">
               <MdTimeline />
             </a>
           </Link>
-          <div className={styles.themeSwitcher} onClick={switchTheme}>
+          <div className={styles.themeSwitcher} onClick={switchTheme} aria-label="Toggle Theme">
             <MdBrightness6 />
           </div>
         </div>
