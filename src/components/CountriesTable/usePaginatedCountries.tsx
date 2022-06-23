@@ -6,11 +6,22 @@ import CountryContext from '../CountryContext/CountryContext';
 
 const orderBy = (countries: any, value: any, direction: any) => {
   if (direction === 'asc') {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+    if (typeof countries[0][value] === 'string') {
+      return [...countries].sort((a, b) =>
+        a[value].localeCompare(b[value], 'fr', { ignorePunctuation: false })
+      );
+    } else return [...countries].sort((a, b) => a[value] - b[value]);
   }
 
   if (direction === 'desc') {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+    if (typeof countries[0][value] === 'string') {
+      return [...countries]
+        .sort((a, b) =>
+          a[value].localeCompare(b[value], 'fr', { ignorePunctuation: false })
+        )
+        .reverse();
+    }
+    return [...countries].sort((a, b) => b[value] - a[value]);
   }
 
   return countries;
@@ -30,6 +41,7 @@ export const usePaginatedCountries = () => {
   const t = locale === 'en-US' ? en : fr;
 
   useEffect(() => {
+    console.log(value, direction, filteredCountries);
     const orderedList = orderBy(filteredCountries, value, direction);
     setOrderedCountries(orderedList);
     const currentPageData = orderedList.slice(0, PER_PAGE);
@@ -38,10 +50,10 @@ export const usePaginatedCountries = () => {
     setHasMore(true);
   }, [filteredCountries, value, direction]);
 
-  const setValueAndDirection = useCallback((value: any) => {
+  const setValueAndDirection = (value: any) => {
     switchDirection();
     setValue(value);
-  }, []);
+  };
 
   const switchDirection = () => {
     if (!direction) {
