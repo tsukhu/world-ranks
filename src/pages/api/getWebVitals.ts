@@ -1,18 +1,18 @@
-import Cors from "cors";
-import initMiddleware from "../../lib/init-middleware";
+import Cors from 'cors';
+import initMiddleware from '../../lib/init-middleware';
 
-import { table, minifyRecords } from "./utils/Airtable";
+import { table, minifyRecords } from './utils/Airtable';
 
 // Initialize the cors middleware
 const cors = initMiddleware(
   // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
   Cors({
     // Only allow requests with GET, POST and OPTIONS
-    methods: ["GET", "OPTIONS"],
+    methods: ['GET', 'OPTIONS'],
   })
 );
 
-const getWebVitals = async (req, res) => {
+const getWebVitals = async (req: any, res: any) => {
   // Run cors
   await cors(req, res);
   const {
@@ -20,12 +20,12 @@ const getWebVitals = async (req, res) => {
   } = req;
 
   try {
-    const records = await new Promise((resolve, reject) => {
-      let finalrecords = [];
+    const records: any = await new Promise((resolve, reject) => {
+      let finalrecords: any[] = [];
       table
         .select({
           maxRecords: 1000,
-          sort: [{field: "creationTime", direction: "desc"}],
+          sort: [{ field: 'creationTime', direction: 'desc' }],
           filterByFormula: `IF(
             AND(
               ${url ? `{url} = ${url}` : 1},
@@ -34,7 +34,7 @@ const getWebVitals = async (req, res) => {
               )`,
         })
         .eachPage(
-          function page(records, fetchNextPage) {
+          function page(records: any, fetchNextPage: () => void) {
             // This function (`page`) will get called for each page of records.
             finalrecords.push(minifyRecords(records));
 
@@ -43,7 +43,7 @@ const getWebVitals = async (req, res) => {
             // If there are no more records, `done` will get called.
             fetchNextPage();
           },
-          function done(err) {
+          function done(err: any) {
             if (err) {
               console.error(err);
               reject(err);
@@ -52,12 +52,12 @@ const getWebVitals = async (req, res) => {
           }
         );
     });
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader('Content-Type', 'application/json');
     res.statusCode = 200;
     res.json(records[0]);
-  } catch (err) {
+  } catch (err: any) {
     res.statusCode = 500;
-    res.json({ msg: "Something went wrong", error: err.message });
+    res.json({ msg: 'Something went wrong', error: err.message });
   }
 };
 

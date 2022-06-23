@@ -1,14 +1,22 @@
-import Layout from "../../components/Layout/Layout";
-import Maps from "../../components/Maps/Maps";
-import styles from "./CountryInfo.module.css";
-import { useRouter } from "next/router";
-import en from "../../../locales/en-US";
-import fr from "../../../locales/fr";
+import Layout from '../../components/Layout/Layout';
+import Maps from '../../components/Maps/Maps';
+import styles from './CountryInfo.module.css';
+import { useRouter } from 'next/router';
+import en from '../../../locales/en-US';
+import fr from '../../../locales/fr';
 
-const CountryInfo = ({ country, id, error }) => {
+const CountryInfo = ({
+  country,
+  id,
+  error,
+}: {
+  country: any;
+  id: string;
+  error: any;
+}) => {
   const router = useRouter();
   const { locale } = router;
-  const t = locale === "en-US" ? en : fr;
+  const t = locale === 'en-US' ? en : fr;
   if (error)
     return (
       <Layout title={id}>
@@ -69,7 +77,7 @@ const CountryInfo = ({ country, id, error }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query }: { query: any }) {
   const { id, name } = query;
   if (id && name) {
     const res = await fetch(

@@ -1,4 +1,4 @@
-
+@import '~mapbox-gl/dist/mapbox-gl.css';
 :root {
   --text-color: #124a63;
   --text-color-secondary: #525252;
@@ -9,11 +9,11 @@
   --background-color-dark: #eef3f6;
   --background-color-light: white;
 
-  --font-family: "Poppins", sans-serif;
+  --font-family: 'Poppins', sans-serif;
   --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --text-color: #f0f0f0;
   --text-color-secondary: #b3c5cd;
 

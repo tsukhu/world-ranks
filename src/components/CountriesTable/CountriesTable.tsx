@@ -1,32 +1,31 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
-import { IconContext } from "react-icons";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import CountryContext from "../CountryContext/CountryContext";
-import InfiniteScroll from "react-infinite-scroll-component";
-import styles from "./CountriesTable.module.css";
-import en from "../../../locales/en-US";
-import fr from "../../../locales/fr";
+import { useState, useEffect, useContext, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Image from 'next/image';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import CountryContext from '../CountryContext/CountryContext';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import styles from './CountriesTable.module.css';
+import en from '../../../locales/en-US';
+import fr from '../../../locales/fr';
 
-const orderBy = (countries, value, direction) => {
-  if (direction === "asc") {
+const orderBy = (countries: any, value: any, direction: any) => {
+  if (direction === 'asc') {
     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
   }
 
-  if (direction === "desc") {
+  if (direction === 'desc') {
     return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
   }
 
   return countries;
 };
 
-const SortArrow = ({ direction }) => {
+const SortArrow = ({ direction }: any) => {
   if (!direction) {
     return <></>;
   }
-  if (direction === "desc") {
+  if (direction === 'desc') {
     return (
       <div className={styles.heading_arrow}>
         <MdKeyboardArrowDown color="inherit" />
@@ -42,7 +41,7 @@ const SortArrow = ({ direction }) => {
 };
 
 const CountriesTable = () => {
-  const PER_PAGE = 4;
+  const PER_PAGE = 10;
   const { filteredCountries, value, direction, setDirection, setValue } =
     useContext(CountryContext);
   const [currentPage, setCurrentPage] = useState(0);
@@ -51,7 +50,7 @@ const CountriesTable = () => {
   const [orderedCountries, setOrderedCountries] = useState([]);
   const router = useRouter();
   const { locale } = router;
-  const t = locale === "en-US" ? en : fr;
+  const t = locale === 'en-US' ? en : fr;
   useEffect(() => {
     const orderedList = orderBy(filteredCountries, value, direction);
     setOrderedCountries(orderedList);
@@ -68,11 +67,11 @@ const CountriesTable = () => {
 
   const switchDirection = () => {
     if (!direction) {
-      setDirection("desc");
-    } else if (direction === "desc") {
-      setDirection("asc");
-    } else if (direction === "asc") {
-      setDirection("desc");
+      setDirection('desc');
+    } else if (direction === 'desc') {
+      setDirection('asc');
+    } else if (direction === 'asc') {
+      setDirection('desc');
     } else {
       setDirection(null);
     }
@@ -105,43 +104,43 @@ const CountriesTable = () => {
           <div className={styles.heading_flag}></div>
           <div
             className={styles.heading_name}
-            onClick={() => setValueAndDirection("name")}
+            onClick={() => setValueAndDirection('name')}
           >
             <div>{t.name}</div>
-            {value === "name" && <SortArrow direction={direction}></SortArrow>}
+            {value === 'name' && <SortArrow direction={direction}></SortArrow>}
           </div>
           <div
             className={styles.heading_population}
-            onClick={() => setValueAndDirection("population")}
+            onClick={() => setValueAndDirection('population')}
           >
             <div>{t.population}</div>
-            {value === "population" && (
+            {value === 'population' && (
               <SortArrow direction={direction}></SortArrow>
             )}
           </div>
 
           <div
             className={styles.heading_area}
-            onClick={() => setValueAndDirection("area")}
+            onClick={() => setValueAndDirection('area')}
           >
             <div>
               {`${t.area} (km `}
-              <sup style={{ fontSize: "0.5rem" }}>2</sup>
-              {")"}
+              <sup style={{ fontSize: '0.5rem' }}>2</sup>
+              {')'}
             </div>
-            {value === "area" && <SortArrow direction={direction}></SortArrow>}
+            {value === 'area' && <SortArrow direction={direction}></SortArrow>}
           </div>
 
           <div
             className={styles.heading_gini}
-            onClick={() => setValueAndDirection("gini")}
+            onClick={() => setValueAndDirection('gini')}
           >
             <div>{t.gini}</div>
-            {value === "gini" && <SortArrow direction={direction}></SortArrow>}
+            {value === 'gini' && <SortArrow direction={direction}></SortArrow>}
           </div>
         </div>
 
-        {currentList.map((country) => {
+        {currentList.map((country: any) => {
           return (
             <Link
               href={`/country/${country.alpha3Code}`}

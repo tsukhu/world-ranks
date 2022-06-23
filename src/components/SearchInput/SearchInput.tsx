@@ -1,6 +1,5 @@
-import { MdSearch } from "react-icons/md";
-import { IconContext } from "react-icons";
-import styles from "./SearchInput.module.css";
+import { MdSearch } from 'react-icons/md';
+import styles from './SearchInput.module.css';
 
 const SearchInput = ({ ...rest }) => {
   return (

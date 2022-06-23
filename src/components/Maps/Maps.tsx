@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import ReactMapGL from "react-map-gl";
+import { useState, useEffect } from 'react';
+import ReactMapGL from 'react-map-gl';
 
 const Maps = ({
   latitude,
   longitude,
   parentDimensions,
 }: {
-  latitude: number,
-  longitude: number,
-  parentDimensions?: number,
+  latitude: number;
+  longitude: number;
+  parentDimensions?: number;
 }) => {
   const [viewport, setViewport] = useState({
     latitude: 41.5868,
@@ -18,7 +18,7 @@ const Maps = ({
 
   useEffect(() => {
     if (latitude && longitude) {
-    //  console.log(latitude, longitude);
+      //  console.log(latitude, longitude);
       setViewport({
         ...viewport,
         latitude,
@@ -27,19 +27,15 @@ const Maps = ({
     }
   }, []);
 
- // console.log(parentDimensions);
+  //console.log(process.env.NEXT_PUBLIC_MAPBOX_TOKEN);
   return (
     <>
       {viewport && (
         <ReactMapGL
-          height={320}
           mapStyle="mapbox://styles/mapbox/streets-v9"
-          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-          onViewportChange={(viewport) => setViewport({ ...viewport })}
+          mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
           {...viewport}
-          width={
-            "100%" /* this must come after viewport, or width gets set to fixed size via onViewportChange */
-          }
+          style={{ width: '100%', height: 400 }}
         />
       )}
     </>

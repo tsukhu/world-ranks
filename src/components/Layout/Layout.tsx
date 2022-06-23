@@ -1,41 +1,41 @@
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/router";
-import { MdBrightness6, MdTimeline } from "react-icons/md";
-import { IconContext } from "react-icons";
-import Head from "next/head";
-import Link from "next/link";
-import Logo from "./Logo";
-import styles from "./Layout.module.css";
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { MdBrightness6, MdTimeline } from 'react-icons/md';
+import { IconContext } from 'react-icons';
+import Head from 'next/head';
+import Link from 'next/link';
+import Logo from './Logo';
+import styles from './Layout.module.css';
 
-const Layout = ({ children, title = "World Ranks" }) => {
+const Layout = ({ children, title = 'World Ranks' }: any) => {
   const router = useRouter();
   const { locale } = router;
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
   useEffect(() => {
     document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme")
+      'data-theme',
+      localStorage.getItem('theme') ?? 'light'
     );
 
-    setTheme(localStorage.getItem("theme") || "light");
+    setTheme(localStorage.getItem('theme') || 'light');
   }, []);
 
   const switchTheme = () => {
-    if (theme === "light") {
-      saveTheme("dark");
+    if (theme === 'light') {
+      saveTheme('dark');
     } else {
-      saveTheme("light");
+      saveTheme('light');
     }
   };
 
-  const changeLanguage = useCallback((locale) => {
+  const changeLanguage = useCallback((locale: string) => {
     router.replace(router.asPath, router.asPath, { locale });
-  },[]);
+  }, []);
 
-  const saveTheme = (theme) => {
+  const saveTheme = (theme: string) => {
     setTheme(theme);
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
   };
   return (
     <div className={styles.container}>
@@ -57,18 +57,18 @@ const Layout = ({ children, title = "World Ranks" }) => {
         <div className={styles.menuWrapper}>
           <span
             className={`${styles.locale} ${
-              locale === "en-US" ? styles.active : ""
+              locale === 'en-US' ? styles.active : ''
             }`}
-            onClick={() => changeLanguage("en-US")}
+            onClick={() => changeLanguage('en-US')}
           >
             en
           </span>
           <span className={styles.locale}>|</span>
           <span
             className={`${styles.locale} ${
-              locale === "fr" ? styles.active : ""
+              locale === 'fr' ? styles.active : ''
             }`}
-            onClick={() => changeLanguage("fr")}
+            onClick={() => changeLanguage('fr')}
           >
             fr
           </span>
@@ -77,7 +77,11 @@ const Layout = ({ children, title = "World Ranks" }) => {
               <MdTimeline />
             </a>
           </Link>
-          <div className={styles.themeSwitcher} onClick={switchTheme} aria-label="Toggle Theme">
+          <div
+            className={styles.themeSwitcher}
+            onClick={switchTheme}
+            aria-label="Toggle Theme"
+          >
             <MdBrightness6 />
           </div>
         </div>

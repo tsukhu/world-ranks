@@ -1,6 +1,6 @@
-import { table, minifyRecords } from "./utils/Airtable";
+import { table, minifyRecords } from './utils/Airtable';
 
- const createWebVital = async (req, res) => {
+const createWebVital = async (req: any, res: any) => {
   const { id, name, startTime, value, label, url } = req.body;
   try {
     const createdRecords = await table.create([
@@ -19,10 +19,10 @@ import { table, minifyRecords } from "./utils/Airtable";
       id: createdRecords[0].id,
       fields: createdRecords[0].fields,
     };
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader('Content-Type', 'application/json');
     res.statusCode = 200;
     res.json(createdRecord);
-  } catch (err) {
+  } catch (err: any) {
     res.statusCode = 500;
     res.json({ msg: err.message });
   }

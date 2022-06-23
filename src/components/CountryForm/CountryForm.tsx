@@ -1,8 +1,8 @@
-import * as React from "react";
-import styles from "./CountryForm.module.css";
+import * as React from 'react';
+import styles from './CountryForm.module.css';
 
-const CountryForm = ({ onClick, ...rest }) => {
-  const [input, setInput] = React.useState("");
+const CountryForm = ({ onClick, ...rest }: any) => {
+  const [input, setInput] = React.useState('');
   return (
     <div className={styles.wrapper}>
       <input

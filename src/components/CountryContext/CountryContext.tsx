@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const CountryContext = createContext({
-  filteredText: "",
+  filteredText: '',
   value: undefined,
   direction: undefined,
   countries: [],
