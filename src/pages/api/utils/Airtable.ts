@@ -4,11 +4,11 @@ const base = new Airtable({
 }).base(process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID);
 
 const table = base(`${process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME}`);
-const minifyRecords = (records) => {
-  return records.map((record) => getMinifiedRecord(record));
+const minifyRecords = (records: any[]) => {
+  return records.map((record: any) => getMinifiedRecord(record));
 };
 
-const getMinifiedRecord = (record) => {
+const getMinifiedRecord = (record: { id: any; fields: any }) => {
   return {
     id: record.id,
     fields: record.fields,
