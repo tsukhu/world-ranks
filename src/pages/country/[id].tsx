@@ -85,16 +85,20 @@ const Country = ({ country, locale }: { country: any; locale: string }) => {
 
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>{t.languages}</div>
-              <div className={styles.details_panel_value}>
-                {country.languages.map(({ name }: any) => name).join(', ')}
-              </div>
+              {country.languages && Array.isArray(country.languages) && (
+                <div className={styles.details_panel_value}>
+                  {country?.languages.map(({ name }: any) => name).join(', ')}
+                </div>
+              )}
             </div>
 
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>{t.currencies}</div>
-              <div className={styles.details_panel_value}>
-                {country.currencies.map(({ name }: any) => name).join(', ')}
-              </div>
+              {country.currencies && Array.isArray(country.currencies) && (
+                <div className={styles.details_panel_value}>
+                  {country.currencies.map(({ name }: any) => name).join(', ')}
+                </div>
+              )}
             </div>
 
             <div className={styles.details_panel_row}>
