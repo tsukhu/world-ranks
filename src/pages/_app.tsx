@@ -4,14 +4,8 @@ import Router from 'next/router';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
+import NextProgress from 'next-progress';
 import CountryContextProvider from '../components/CountryContext/CountryContextProvider';
-
-//Binding events.
-Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
-Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClientRef = React.useRef<any>();
@@ -21,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClientRef.current}>
       <CountryContextProvider countries={pageProps.countries}>
+        <NextProgress delay={300} options={{ showSpinner: false }} />
         <Component {...pageProps} />
       </CountryContextProvider>
       <ReactQueryDevtools />
