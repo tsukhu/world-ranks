@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Objective
 
-Experiments with NextJS 10.
+Experiments with NextJS 12.
 
 . This has been extended to try out different features of NextJS 10.
 
@@ -23,6 +23,7 @@ Experiments with NextJS 10.
     - Moved to Typescript
     - Types code gen for graphql using apollo client
     - i18n based router
+    - React 18 migration
 
 ## Current Results
 
